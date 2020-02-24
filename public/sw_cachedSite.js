@@ -3,12 +3,12 @@ const cacheName = 'v2'
 
 //call install event
 self.addEventListener('install', (e) => {
-    console.log('Service Worked : Installed');
+    console.log('Service Worker for site: Installed');
 })
 
 //call Activate Event
 self.addEventListener('activate', (e) => {
-    console.log('Service Worked : Activated')
+    console.log('Service  Worker for site : Activated')
     //Remove Unwanted caches
     e.waitUntil(caches.keys()
         .then(cacheNames => {
@@ -23,7 +23,7 @@ self.addEventListener('activate', (e) => {
 
 //call fetch event 
 self.addEventListener('fetch', (e) => {
-    console.log('service worker : Clone fetching');
+    console.log('service  Worker for site : Clone fetching');
     e.respondWith(
         fetch(e.request)
             .then(res => {
@@ -39,7 +39,6 @@ self.addEventListener('fetch', (e) => {
                 return res
             })
             .catch((err) => {
-                console.log('£££', resClone)
                 caches.match(e.request).then(res => res)
             }))
 })
