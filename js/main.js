@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-const url = 'http://localhost:5000/';
+const url = 'http://localhost:5000/search';
 
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
