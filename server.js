@@ -9,9 +9,8 @@ app.use(express.json({ extended: false }), function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
+app.set('view engine', 'html')
 app.get('/', function (req, res) {
-
     // ejs render automatically looks in the views folder
     res.render('index');
 });
