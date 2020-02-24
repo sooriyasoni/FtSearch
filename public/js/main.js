@@ -1,15 +1,18 @@
 'use strict';
+
 //make sure service worked are supported
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+    window.addEventListener('load', (e) => {
+        navigator.serviceWorker.getRegistrations().then(function (registrations) { for (let registration of registrations) { registration.unregister() } })
         navigator.serviceWorker
-            .register('../sw_cachedPage.js')
+            .register('/sw_cachedPage.js')
             .then(reg => console.log('Service Worker Registered'))
             .catch(err => console.log(`service worker :Error:${err}`))
     })
 }
 
-const url = 'https://ftsearch-v1.herokuapp.com/search';
+// const url = 'https://ftsearch-v1.herokuapp.com/search';
+const url = 'http://localhost:5000/search'
 
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
@@ -30,8 +33,6 @@ async function onClickPage(pageId) {
 
     fetch(url, {
         method: 'POST',
-        mode: 'cors', // no-cors, *cors, same-origin
-        credentials: 'same-origin', // include, *same-origin, omit
         headers: {
             'Content-Type': 'application/json'
         },

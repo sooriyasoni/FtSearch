@@ -18,19 +18,24 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+//service worker to make site offline working
 app.get("/service-worker.js", (req, res) => {
+    var sw = path.resolve(__dirname, "/public/", "sw_cachedPage.js")
+    console.log(sw)
     res.writeHead(201, {
         'Content-Type': 'application/javascript'
     });
-    res.sendFile(path.resolve(__filename, "service-worker.js"));
+    res.sendFile(sw);
 });
 
-app.get('*', function (req, res) {
+app.get('*', function (req, res, next) {
     // render automatically looks in the views folder
     var index = path.join(__dirname, 'public', 'index.html');
     res.sendFile(index);
+    next()
 });
 
+//POST REQUEST FOR SEARCH USING REQUEST MODULE TO FETCH FROM FT
 app.post('/search', (req, res) => {
     var options = {
         'method': 'POST',
