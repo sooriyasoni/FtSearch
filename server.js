@@ -1,16 +1,23 @@
 const express = require("express")
 const request = require('request');
-
+const bodyParser = require('body-parser');
 
 
 const app = express()
-app.use(express.json({ extended: false }), express.static(__dirname + '/css'))
-app.set('view engine', 'html')
-// make express look in the public directory for assets (css/js/img)
 
-app.get('/', function (req, res) {
+app.use(express.json({ extended: false }), express.static(__dirname + '/public'))
+app.set('views', __dirname + 'public/views');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html')
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
+app.get('*', function (req, res) {
     // render automatically looks in the views folder
-    res.render('index');
+    res.render('index.html');
 });
 
 app.post('/', (req, res) => {
