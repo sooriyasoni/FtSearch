@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-const url = 'http://localhost:5000/search';
+const url = 'https://ftsearch-v1.herokuapp.com';
 
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
