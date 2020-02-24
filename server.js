@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 app.get('*', function (req, res) {
     // render automatically looks in the views folder
-    res.render('/public/views/index.html');
+    res.render('index.html');
 });
 
 app.post('/', (req, res) => {
