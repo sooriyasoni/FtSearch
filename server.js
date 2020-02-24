@@ -6,7 +6,7 @@ const path = require('path');
 
 const app = express()
 
-app.use(express.json({ extended: false }), express.static(path.join(__dirname + 'dist/public')))
+app.use(express.json({ extended: false }), express.static(path.join(__dirname + './public')))
 
 
 app.use(bodyParser.urlencoded({
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 app.get('*', function (req, res) {
     // render automatically looks in the views folder
-    res.sendFile(path.join(__dirname + 'dist/views/index.html'));
+    res.sendFile(path.join(__dirname + './views/index.html'));
 });
 
 app.post('/search', (req, res) => {
