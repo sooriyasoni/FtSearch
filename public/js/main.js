@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', (e) => {
         navigator.serviceWorker.getRegistrations().then(function (registrations) { for (let registration of registrations) { registration.unregister() } })
         navigator.serviceWorker
-            .register('/sw_cachedPage.js', '/sw_cachedSite.js')
+            .register('/sw_cachedPage.js')
             .then(reg => console.log('Service Worker Registered'))
             .catch(err => console.log(`service worker :Error:${err}`))
     })
