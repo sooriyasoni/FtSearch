@@ -1,5 +1,5 @@
 //caching the whole site
-const cacheName = 'v2'
+var cacheName = 'v2'
 
 //call install event
 self.addEventListener('install', (e) => {
@@ -28,7 +28,7 @@ self.addEventListener('fetch', (e) => {
         fetch(e.request)
             .then(res => {
                 //make clone of response 
-                const resClone = res.clone();
+                var resClone = res.clone();
                 //open a cache
                 caches
                     .open(cacheName)

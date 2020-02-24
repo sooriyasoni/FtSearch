@@ -1,10 +1,10 @@
-const express = require("express")
-const request = require('request');
-const bodyParser = require('body-parser');
-const path = require('path');
+var express = require("express")
+var request = require('request');
+var bodyParser = require('body-parser');
+var path = require('path');
 
 
-const app = express()
+var app = express()
 
 app.use(express.json({ extended: false }), express.static(__dirname + '/public'), function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -64,7 +64,7 @@ app.post('/search', (req, res) => {
     })
 })
 
-const PORT = process.env.PORT || 5000
+var PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
     console.log(`server connected on port ${PORT}`)
 })

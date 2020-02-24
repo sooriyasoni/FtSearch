@@ -1,5 +1,5 @@
-const cacheName = 'v1'
-const cacheAsset = [
+var cacheName = 'v1'
+var cacheAsset = [
     'index.html',
     '/js/main.js',
     '/css/main.css',

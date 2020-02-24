@@ -11,9 +11,6 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-const url = 'https://ftsearch-v1.herokuapp.com/search';
-// const url = 'http://localhost:5000/search'
-
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
     document.getElementById('next').style.display = 'none';
@@ -21,6 +18,8 @@ function onLoad() {
 }
 
 async function onClickPage(pageId) {
+    var url = 'https://ftsearch-v1.herokuapp.com/search';
+    // var url = 'http://localhost:5000/search'
     document.title = document.getElementById('query').value
     var aspects = ['title', 'summary'];
     var pageNo = document.getElementById(pageId).value;
