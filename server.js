@@ -6,7 +6,7 @@ const path = require('path');
 
 const app = express()
 
-app.use(express.json({ extended: false }), express.static(path.join(__dirname + '/public')))
+app.use(express.json({ extended: false }), express.static(__dirname + '/public'))
 
 
 app.use(bodyParser.urlencoded({
@@ -14,9 +14,17 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.get("/service-worker.js", (req, res) => {
+    res.writeHead(201, {
+        'Content-Type': 'application/javascript'
+    });
+    res.sendFile(path.resolve(__filename, "service-worker.js"));
+});
+
 app.get('*', function (req, res) {
     // render automatically looks in the views folder
-    res.sendFile(path.join(__dirname + '/../views/index.html'));
+    // console.log('rendered')
+    res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 app.post('/search', (req, res) => {
