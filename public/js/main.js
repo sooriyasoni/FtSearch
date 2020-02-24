@@ -30,8 +30,8 @@ async function onClickPage(pageId) {
 
     fetch(url, {
         method: 'POST',
-        mode: '*cors', // no-cors, *cors, same-origin
-        credentials: '*same-origin', // include, *same-origin, omit
+        mode: 'cors', // no-cors, *cors, same-origin
+        credentials: 'same-origin', // include, *same-origin, omit
         headers: {
             'Content-Type': 'application/json'
         },
