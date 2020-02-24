@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express()
 
 app.use(express.json({ extended: false }), express.static(__dirname + '/public'))
-app.set('views', __dirname + 'public/views');
+app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html')
 
