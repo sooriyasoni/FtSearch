@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
     })
 }
 
-const url = 'https://ftsearch-v1.herokuapp.com';
+const url = 'https://ftsearch-v1.herokuapp.com/search';
 
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
