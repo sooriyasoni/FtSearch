@@ -23,8 +23,8 @@ app.get("/service-worker.js", (req, res) => {
 
 app.get('*', function (req, res) {
     // render automatically looks in the views folder
-    // console.log('rendered')
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+    var index = path.join(__dirname, 'public', 'index.html');
+    res.sendFile(index);
 });
 
 app.post('/search', (req, res) => {
