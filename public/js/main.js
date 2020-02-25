@@ -29,7 +29,7 @@ function onClickPage(pageId) {
         aspects: aspects,
         maxResults: 10
     };
-    var fetch = require('node-fetch')
+    var fetch = require('isomorphic-unfetch');
     fetch(url, {
         method: 'POST',
         headers: {
