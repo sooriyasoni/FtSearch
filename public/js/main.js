@@ -31,8 +31,8 @@ function onClickPage(pageId) {
         maxResults: 10
     };
     var http = new XMLHttpRequest();
-    // var url = 'https://ftsearch-v1.herokuapp.com/search';
-    var url = "http://localhost:5000/search"
+    var url = 'https://ftsearch-v1.herokuapp.com/search';
+    // var url = "http://localhost:5000/search"
     var params = {
         queryString: document.getElementById('query').value,
         resultContext: resultContext
