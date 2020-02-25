@@ -1,3 +1,5 @@
+var url = 'https://ftsearch-v1.herokuapp.com/search';
+import fetch from 'isomorphic-unfetch';
 
 //make sure service worked are supported
 if ('serviceWorker' in navigator) {
@@ -9,6 +11,7 @@ if ('serviceWorker' in navigator) {
             .catch(function (err) { console.log("service worker :Error", err); });
     });
 }
+//for search on enter key
 var input = document.getElementById("query");
 input.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
@@ -16,8 +19,6 @@ input.addEventListener("keyup", function (event) {
         document.getElementById("go").click();
     }
 })
-var url = 'https://ftsearch-v1.herokuapp.com/search';
-// const url = 'http://localhost:5000/search'
 
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
@@ -35,7 +36,6 @@ function onClickPage(pageId) {
         aspects: aspects,
         maxResults: 10
     };
-    import fetch from 'isomorphic-unfetch';
     fetch(url, {
         method: 'POST',
         headers: {
