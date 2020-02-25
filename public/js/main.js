@@ -29,8 +29,8 @@ function onClickPage(pageId) {
         aspects: aspects,
         maxResults: 10
     };
-
-    window.fetch(url, {
+    var fetch = require('node-fetch')
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
