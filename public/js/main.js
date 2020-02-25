@@ -9,7 +9,13 @@ if ('serviceWorker' in navigator) {
             .catch(function (err) { console.log("service worker :Error", err); });
     });
 }
-
+var input = document.getElementById("query");
+input.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("go").click();
+    }
+})
 var url = 'https://ftsearch-v1.herokuapp.com/search';
 // const url = 'http://localhost:5000/search'
 
@@ -29,7 +35,7 @@ function onClickPage(pageId) {
         aspects: aspects,
         maxResults: 10
     };
-    var fetch = require('isomorphic-unfetch');
+    import fetch from 'isomorphic-unfetch';
     fetch(url, {
         method: 'POST',
         headers: {
