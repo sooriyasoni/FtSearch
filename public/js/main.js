@@ -1,15 +1,17 @@
-'use strict';
 
 //make sure service worked are supported
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', (e) => {
-        navigator.serviceWorker.getRegistrations().then(function (registrations) { for (let registration of registrations) { registration.unregister() } })
+    window.addEventListener('load', function (e) {
+        // navigator.serviceWorker.getRegistrations().then(function (registrations) { for (let registration of registrations) { registration.unregister() } })
         navigator.serviceWorker
             .register('/sw_cachedPage.js')
-            .then(reg => console.log('Service Worker Registered'))
-            .catch(err => console.log(`service worker :Error:${err}`))
-    })
+            .then(function (reg) { console.log('Service Worker Registered'); })
+            .catch(function (err) { console.log("service worker :Error", err); });
+    });
 }
+
+var url = 'https://ftsearch-v1.herokuapp.com/search';
+// const url = 'http://localhost:5000/search'
 
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
@@ -17,10 +19,8 @@ function onLoad() {
     document.getElementById('curr').style.display = 'none';
 }
 
-async function onClickPage(pageId) {
-    var url = 'https://ftsearch-v1.herokuapp.com/search';
-    // var url = 'http://localhost:5000/search'
-    document.title = document.getElementById('query').value
+function onClickPage(pageId) {
+    document.title = document.getElementById('query').value;
     var aspects = ['title', 'summary'];
     var pageNo = document.getElementById(pageId).value;
     pageNo = parseInt(pageNo);
@@ -40,23 +40,25 @@ async function onClickPage(pageId) {
             resultContext: resultContext
         })
     })
-        .then(response => {
+        .then(function (response) {
             return response.json();
         })
-        .then(myJson => {
+        .then(function (myJson) {
             console.log(myJson);
             if (myJson.error == false) {
                 var res = myJson.data;
                 var txt = '';
                 txt = '<div class="search-results o-teaser-collection" ><div class="search-results__heading"><div class="search-results__heading-title"> <h2 class="o-teaser-collection__heading o-teaser-collection__heading--half-width"> Viewing Search Results for <strong>"' + document.getElementById('query').value + '"</strong> </h2> </div> </div>';
 
-                for (let i in res.results[0].results) {
-                    var title = res.results[0].results[i].title;
-                    var apiUrl = res.results[0].results[i].apiUrl;
-                    var summary = res.results[0].results[i].summary.excerpt;
-                    txt += '<ul class="search-results__list" > <li class="search-results__list-item" > <div class="search-item"> <div class="search-item__teaser"> <div class="o-teaser o-teaser--article o-teaser--small o-teaser--has-image js-teaser" > <div class="o-teaser__content"><div class="o-teaser__heading"> <a href=' + apiUrl + '  class="js-teaser-heading-link">' + title.title + '</a> </div> <p class="o-teaser__standfirst"> <a href=' + apiUrl + ' class="js-teaser-standfirst-link"><span>' + summary + '</span> </a> </p> </div> </div> </div> </div> </li> </ul>';
+                for (var i in res.results[0].results) {
+                    if (res.results[0].results != undefined) {
+                        var title = res.results[0].results[i].title;
+                        var apiUrl = res.results[0].results[i].apiUrl;
+                        var summary = res.results[0].results[i].summary.excerpt;
+                        txt += '<ul class="search-results__list" > <li class="search-results__list-item" > <div class="search-item"> <div class="search-item__teaser"> <div class="o-teaser o-teaser--article o-teaser--small o-teaser--has-image js-teaser" > <div class="o-teaser__content"><div class="o-teaser__heading"> <a href=' + apiUrl + '  class="js-teaser-heading-link">' + title.title + '</a> </div> <p class="o-teaser__standfirst"> <a href=' + apiUrl + ' class="js-teaser-standfirst-link"><span>' + summary + '</span> </a> </p> </div> </div> </div> </div> </li> </ul>';
+                    }
                 }
-                txt += '</div>';;
+                txt += '</div>';
                 document.getElementById('search-content').innerHTML = txt;
                 document.getElementById('pagination').style.display = 'block';
                 document.getElementById('prev').style.display = 'block';
@@ -73,7 +75,7 @@ async function onClickPage(pageId) {
                 }
             }
         })
-        .catch(err => {
+        .catch(function (err) {
             console.log(err);
             document.getElementById('demo').innerHTML = err;
         });
