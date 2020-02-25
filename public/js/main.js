@@ -30,7 +30,7 @@ function onClickPage(pageId) {
         maxResults: 10
     };
 
-    fetch(url, {
+    window.fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
