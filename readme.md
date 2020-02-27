@@ -15,7 +15,7 @@ It includes follwing features :
 ● Performs well over 3G networks : Tested and working fine using browser network throtteling with slow networks.
 ● Works offline : Implemented this functionality in Google Chrome using service worker. Cached the pages and site using JavaScript event listeners. Works offline successfully once the site is cached.
 
-website: https://ftsearch-v1.herokuapp.com/
+website access URL : https://ftsearch-v1.herokuapp.com/
 
 Requirements:
 Node
