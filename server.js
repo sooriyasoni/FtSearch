@@ -1,3 +1,4 @@
+//importing package in global variables 
 var express = require("express")
 var request = require('request');
 var bodyParser = require('body-parser');
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//service worker to make site offline working
+//using service worker to make site offline working
 app.get("/service-worker.js", (req, res) => {
     var sw = path.resolve(__dirname, "/public/", "sw_cachedPage.js")
     console.log(sw)
@@ -46,16 +47,14 @@ app.post('/search', (req, res) => {
         },
         body: JSON.stringify(req.body)
     };
-    console.log('here', options.body)
     request(options, (err, response) => {
         if (err) {
             res.status(400).send({
                 error: true,
-                message: "Bad Request!"
+                message: "Failed to fetch due to bad request!!"
             })
         }
         var body = JSON.parse(response.body)
-        console.log('my response ', body);
         res.status(200).send({
             error: false,
             message: 'successfully fetched',

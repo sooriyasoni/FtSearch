@@ -1,10 +1,11 @@
-
-
+//global variables
+var service = '/search'
+var host = window.location.origin
+var searchService = host + service
 
 //make sure service worked are supported
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function (e) {
-        // navigator.serviceWorker.getRegistrations().then(function (registrations) { for (let registration of registrations) { registration.unregister() } })
         navigator.serviceWorker
             .register('/sw_cachedPage.js')
             .then(function (reg) { console.log('Service Worker Registered'); })
@@ -12,39 +13,38 @@ if ('serviceWorker' in navigator) {
     });
 }
 //for search on enter key
-
-
 function onLoad() {
     document.getElementById('prev').style.display = 'none';
     document.getElementById('next').style.display = 'none';
     document.getElementById('curr').style.display = 'none';
 }
 
-function onClickPage(pageId) {
+//search functionality to be fetched on button click 
+
+function onSearch(buttonId) {
+    //reading search input
     document.title = document.getElementById('query').value;
-    var aspects = ['title', 'summary'];
-    var pageNo = document.getElementById(pageId).value;
+    var pageNo = document.getElementById(buttonId).value;
     pageNo = parseInt(pageNo);
+    //news content request input
+    var aspects = ['title', 'summary'];
     var resultContext = {
         offset: pageNo,
         aspects: aspects,
         maxResults: 10
     };
+    //preparing search content fetching with http
     var http = new XMLHttpRequest();
-    var url = 'https://ftsearch-v1.herokuapp.com/search';
-    // var url = "http://localhost:5000/search"
     var params = {
         queryString: document.getElementById('query').value,
         resultContext: resultContext
     }
 
-    http.open('POST', url, true);
-    //Send the proper header information along with the request
+    http.open('POST', searchService, true);
     http.setRequestHeader('Content-type', 'application/json');
-
     http.send(JSON.stringify(params)) // Make sure to stringify
     http.onload = function () {
-        // Do whatever with response
+        // on search reading search response and populating search result with headlines summary and pagination
         var myJson = JSON.parse(this.responseText);
         if (this.responseText.error != true) {
             var res = myJson.data;
@@ -64,8 +64,6 @@ function onClickPage(pageId) {
                 document.getElementById('prev').style.display = 'block';
                 document.getElementById('curr').style.display = 'block';
                 document.getElementById('next').style.display = 'block';
-                // console.log(pageId);
-                // console.log('pageNo', pageNo);
                 var currPage = pageNo + 1;
                 document.getElementById('prev').value = pageNo - 1;
                 document.getElementById('next').value = pageNo + 1;
