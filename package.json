@@ -13,7 +13,7 @@
     "cors": "^2.8.5",
     "ejs": "^3.0.1",
     "es6-promise": "^4.2.8",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "html": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^2.0.2",
